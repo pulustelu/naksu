@@ -98,4 +98,12 @@
   };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Allow home-manager apps to be discovered by spotlight and other mac tools.
+  # This was previously handled by linkApps.
+  # If there's a permission error, try this:
+  # > I managed to work around this issue by running rm -r ~/Applications/Home\ Manager\ Apps/ before home-manager switch.
+  # (https://github.com/nix-community/home-manager/issues/8174)
+  targets.darwin.copyApps.enable = true;
+  targets.darwin.linkApps.enable = false;
 }
