@@ -1,3 +1,4 @@
+- brew installed manually (but managed by nix)
 - keyboard layouts must be installed manually
 - Finder sidebar, dock, space count set up manually
 - Accessibility: Three finger zoom and finder titlebar icons must be set up manually

@@ -117,6 +117,56 @@
       ];
       specialArgs = { inherit inputs; };
     };
+    darwinConfigurations."drone" = nix-darwin.lib.darwinSystem {
+      modules = [
+        ({ pkgs, ... }: {
+          environment.systemPackages = with pkgs; [
+            # basic tooling
+            vscode
+            gh
+            # work tooling
+            awscli
+            bkt
+            jq
+            ssm-session-manager-plugin
+            _1password-cli
+            # languages
+            rustup # preferred to let it install its own versions
+          ];
+          homebrew = {
+            enable = true;
+            casks = [
+              "stats"
+              "ghostty"
+              "karabiner-elements"
+            ];
+          };
+    
+          # Necessary for using flakes on this system.
+          nix.settings.experimental-features = "nix-command flakes";
+
+          # Set Git commit hash for darwin-version.
+          system.configurationRevision = self.rev or self.dirtyRev or null;
+
+          # Used for backwards compatibility, please read the changelog before changing.
+          # $ darwin-rebuild changelog
+          system.stateVersion = 6;
+
+          # use touch id for sudo prompts
+          security.pam.services.sudo_local.touchIdAuth = true;
+
+          # nix-darwin no longer runs implicitly as the current user
+          system.primaryUser = "olivia.palmu";
+
+          # necessary for vscode
+          nixpkgs.config.allowUnfree = true;
+
+          # The platform the configuration will be used on.
+          nixpkgs.hostPlatform = "aarch64-darwin";
+        })
+      ];
+      specialArgs = { inherit inputs; };
+    };
     # Build nixos flake using:
     # $ nixos-rebuild build --flake .#magpie
     nixosConfigurations."magpie" = nixpkgs.lib.nixosSystem {
