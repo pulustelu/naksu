@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   # tasty dev shells
   programs.direnv.enable = true;

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   # all the various git settings I've picked up along the way, although nowadays I mainly use jujutsu
   programs.git = {
