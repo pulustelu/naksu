@@ -31,7 +31,11 @@
       pull.rebase = true;
       rerere.enabled = true;
     };
-    ignores = [ ".DS_Store" ".envrc" ".direnv" ];
+    ignores = [
+      ".DS_Store"
+      ".envrc"
+      ".direnv"
+    ];
   };
   # gh is sometimes useful, too, though I've mainly used it for cloning
   programs.gh.enable = true;
@@ -50,7 +54,14 @@
       # Automatically track remote branches/bookmarks
       git.auto-local-bookmark = true;
       # goated alias
-      aliases.tug = ["bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-"];
+      aliases.tug = [
+        "bookmark"
+        "move"
+        "--from"
+        "heads(::@- & bookmarks())"
+        "--to"
+        "@-"
+      ];
     };
   };
 }

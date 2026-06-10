@@ -11,13 +11,22 @@
     radicle-node
     cbqn-replxx
     typst
-    (python313.withPackages (ps: with ps; [ ipykernel numpy matplotlib ]))
+    (python313.withPackages (
+      ps: with ps; [
+        ipykernel
+        numpy
+        matplotlib
+      ]
+    ))
     # personal
   ];
 
   # Nix-related configuration
   nix = {
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     optimise.automatic = true;
     gc.automatic = true;
     gc.options = "--delete-older-than 7d";
@@ -32,7 +41,7 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-  
+
   # Enable nonfree apps, e.g. vscode
   nixpkgs.config.allowUnfree = true;
 
@@ -49,7 +58,7 @@
   system.defaults = {
     # Don't navigate back and forward with two-finger scroll
     NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
-    # Use 1,234.56 number format 
+    # Use 1,234.56 number format
     CustomSystemPreferences.NSGlobalDomain.AppleICUNumberSymbols = {
       "0" = ".";
       "1" = ",";
@@ -105,11 +114,13 @@
     CustomUserPreferences."com.apple.AppleMultitouchTrackpad".TrackpadThreeFingerHorizSwipeGesture = 0;
     CustomUserPreferences."com.apple.AppleMultitouchTrackpad".TrackpadThreeFingerVertSwipeGesture = 0;
     # Disable control center from the right edge
-    CustomUserPreferences."com.apple.AppleMultitouchTrackpad".TrackpadTwoFingerFromRightEdgeSwipeGesture = 0;
+    CustomUserPreferences."com.apple.AppleMultitouchTrackpad".TrackpadTwoFingerFromRightEdgeSwipeGesture =
+      0;
     # Do nothing on fn key
     hitoolbox.AppleFnUsageType = "Do Nothing";
     # DON'T AUTOMATICALLY FUCK UP MY KEYBOARD LAYOUT
-    CustomUserPreferences."com.apple.HIToolbox".AppleGlobalTextInputProperties.TextInputGlobalPropertyPerContextInput = 0;
+    CustomUserPreferences."com.apple.HIToolbox".AppleGlobalTextInputProperties.TextInputGlobalPropertyPerContextInput =
+      0;
     # I would prefer not to click to show desktop
     WindowManager.EnableStandardClickToShowDesktop = false;
     # Minor control center customizations: hide some things and show others
@@ -127,27 +138,90 @@
     ];
     # Remove some spotlight options
     CustomUserPreferences."com.apple.spotlight".orderedItems = [
-      { enabled = 1; name = "APPLICATIONS"; }
-      { enabled = 1; name = "MENU_EXPRESSION"; }
-      { enabled = 0; name = "CONTACT"; }
-      { enabled = 1; name = "MENU_CONVERSION"; }
-      { enabled = 1; name = "MENU_DEFINITION"; }
-      { enabled = 1; name = "DOCUMENTS"; }
-      { enabled = 0; name = "EVENT_TODO"; }
-      { enabled = 1; name = "DIRECTORIES"; }
-      { enabled = 0; name = "FONTS"; }
-      { enabled = 1; name = "IMAGES"; }
-      { enabled = 0; name = "MESSAGES"; }
-      { enabled = 0; name = "MOVIES"; }
-      { enabled = 0; name = "MUSIC"; }
-      { enabled = 1; name = "MENU_OTHER"; }
-      { enabled = 1; name = "PDF"; }
-      { enabled = 1; name = "PRESENTATIONS"; }
-      { enabled = 0; name = "MENU_SPOT LIGHT_SUGGESTIONS"; }
-      { enabled = 1; name = "SPREADSHEETS"; }
-      { enabled = 1; name = "SYSTEM_PREFS"; }
-      { enabled = 0; name = "TIPS"; }
-      { enabled = 0; name = "BOOKMARKS"; }
+      {
+        enabled = 1;
+        name = "APPLICATIONS";
+      }
+      {
+        enabled = 1;
+        name = "MENU_EXPRESSION";
+      }
+      {
+        enabled = 0;
+        name = "CONTACT";
+      }
+      {
+        enabled = 1;
+        name = "MENU_CONVERSION";
+      }
+      {
+        enabled = 1;
+        name = "MENU_DEFINITION";
+      }
+      {
+        enabled = 1;
+        name = "DOCUMENTS";
+      }
+      {
+        enabled = 0;
+        name = "EVENT_TODO";
+      }
+      {
+        enabled = 1;
+        name = "DIRECTORIES";
+      }
+      {
+        enabled = 0;
+        name = "FONTS";
+      }
+      {
+        enabled = 1;
+        name = "IMAGES";
+      }
+      {
+        enabled = 0;
+        name = "MESSAGES";
+      }
+      {
+        enabled = 0;
+        name = "MOVIES";
+      }
+      {
+        enabled = 0;
+        name = "MUSIC";
+      }
+      {
+        enabled = 1;
+        name = "MENU_OTHER";
+      }
+      {
+        enabled = 1;
+        name = "PDF";
+      }
+      {
+        enabled = 1;
+        name = "PRESENTATIONS";
+      }
+      {
+        enabled = 0;
+        name = "MENU_SPOT LIGHT_SUGGESTIONS";
+      }
+      {
+        enabled = 1;
+        name = "SPREADSHEETS";
+      }
+      {
+        enabled = 1;
+        name = "SYSTEM_PREFS";
+      }
+      {
+        enabled = 0;
+        name = "TIPS";
+      }
+      {
+        enabled = 0;
+        name = "BOOKMARKS";
+      }
     ];
     # Hide dock
     dock.autohide = true;
@@ -204,7 +278,8 @@
     };
     brews = [
       # last resorts for computer graphics course
-       "cmake" "pkg-config"
+      "cmake"
+      "pkg-config"
     ];
     casks = [
       "arduino-ide"

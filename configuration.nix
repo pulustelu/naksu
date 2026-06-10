@@ -2,13 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -82,7 +87,7 @@
   nixpkgs.overlays = with inputs; [
     nix-vscode-extensions.overlays.default
   ];
-  
+
   fonts = {
     packages = [
       # so many tofu...
@@ -94,14 +99,17 @@
   users.users.olivia = {
     isNormalUser = true;
     description = "Olivia";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       resources
       discord
       # For proton VPN
       protonvpn-gui
       wireguard-tools
-      
+
       proton-pass
       telegram-desktop
       signal-desktop
@@ -109,13 +117,13 @@
       prismlauncher
 
       # global .net SDK for tModLoader mod development
-      dotnetCorePackages.sdk_8_0_4xx 
+      dotnetCorePackages.sdk_8_0_4xx
     ];
   };
 
   # Protonvpn + wireguard
   networking.firewall.checkReversePath = false;
-  
+
   # Basic apps
   programs.firefox.enable = true;
   programs.steam.enable = true;
@@ -180,7 +188,10 @@
   nix = {
     settings = {
       # Enable flakes
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
     # Automatic GC & hardlinking

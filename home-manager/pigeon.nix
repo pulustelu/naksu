@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./vscode.nix ./git.nix ./terminal.nix ];
+  imports = [
+    ./vscode.nix
+    ./git.nix
+    ./terminal.nix
+  ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -18,26 +22,31 @@
     qbittorrent
     zotero
     # Package BeautifulDiscord and point it to my home config
-    (let recipe = { python3, fetchFromGitHub }:
-      with python3.pkgs;
-      buildPythonPackage {
-        name = "BeautifulDiscord";
-        version = "0.2.0";
-        src = fetchFromGitHub {
-          owner = "leovoel";
-          repo = "BeautifulDiscord";
-          rev = "9d6a0366990867f1b36c5f17b3fa3fd3430bdc97";
-          hash = "sha256-UnJh39fzbPnXZmBHkAB3w+MeYw/Cpb+m9fpAVMVqM+M=";
-        };
-        propagatedBuildInputs = [ psutil ];
-        pyproject = true;
-        build-system = [ setuptools ];
-    };
-    beautifuldiscord = pkgs.callPackage recipe {};
-    env = pkgs.python3.withPackages (ps: [ beautifuldiscord ]);
-    in pkgs.writeShellScriptBin "dinject" ''
-      ${env}/bin/python3 -m beautifuldiscord --css ${../discord/style.css}
-    '')
+    (
+      let
+        recipe =
+          { python3, fetchFromGitHub }:
+          with python3.pkgs;
+          buildPythonPackage {
+            name = "BeautifulDiscord";
+            version = "0.2.0";
+            src = fetchFromGitHub {
+              owner = "leovoel";
+              repo = "BeautifulDiscord";
+              rev = "9d6a0366990867f1b36c5f17b3fa3fd3430bdc97";
+              hash = "sha256-UnJh39fzbPnXZmBHkAB3w+MeYw/Cpb+m9fpAVMVqM+M=";
+            };
+            propagatedBuildInputs = [ psutil ];
+            pyproject = true;
+            build-system = [ setuptools ];
+          };
+        beautifuldiscord = pkgs.callPackage recipe { };
+        env = pkgs.python3.withPackages (ps: [ beautifuldiscord ]);
+      in
+      pkgs.writeShellScriptBin "dinject" ''
+        ${env}/bin/python3 -m beautifuldiscord --css ${../discord/style.css}
+      ''
+    )
   ];
 
   # karabiner-elements should NOT be installed using nix for now. maybe it works in the future.
@@ -54,11 +63,11 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      pigeon-switch = ''sudo darwin-rebuild switch --flake ~/.config/nix'';
-      pigeon-update = ''nix flake update nixpkgs-darwin --flake ~/.config/nix'';
-      pigeon-fetch = ''cd ~/.config/nix && jj git fetch && jj new main && cd -'';
-      pigeon-push = ''cd ~/.config/nix && jj commit -m 'Bump pigeon' && jj tug && jj git push && cd -'';
-      pigeon-bump = ''pigeon-fetch && pigeon-update && pigeon-switch && pigeon-push'';
+      pigeon-switch = "sudo darwin-rebuild switch --flake ~/.config/nix";
+      pigeon-update = "nix flake update nixpkgs-darwin --flake ~/.config/nix";
+      pigeon-fetch = "cd ~/.config/nix && jj git fetch && jj new main && cd -";
+      pigeon-push = "cd ~/.config/nix && jj commit -m 'Bump pigeon' && jj tug && jj git push && cd -";
+      pigeon-bump = "pigeon-fetch && pigeon-update && pigeon-switch && pigeon-push";
     };
     # Initialize p10k configuration (took a while to find the config line because the wizard doesn't tell you)
     initContent = ''

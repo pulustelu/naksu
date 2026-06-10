@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./vscode.nix ./git.nix ./terminal.nix ];
-  
+  imports = [
+    ./vscode.nix
+    ./git.nix
+    ./terminal.nix
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "olivia";
@@ -26,7 +30,6 @@
   ];
   home.file = { };
   home.sessionVariables = { };
-
 
   # ghostty (pigeon uses brew to install)
   programs.ghostty.enable = true;
