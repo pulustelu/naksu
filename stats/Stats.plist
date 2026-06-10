@@ -99,39 +99,41 @@
 	<key>LaunchAtLoginNext</key>
 	<true/>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
-	<string>{800, 448}</string>
+	<string>{880, 448}</string>
 	<key>NSNavPanelExpandedStateForSaveMode</key>
 	<true/>
 	<key>NSOSPLastRootDirectory</key>
 	<data>
-	Ym9vazQDAAAAAAQQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAIA
-	AAQAAAADAwAAAAQAAAUAAAABAQAAVXNlcnMAAAAGAAAAAQEAAG9saXZpYQAABwAAAAEB
-	AAAuY29uZmlnAAMAAAABAQAAbml4AAUAAAABAQAAc3RhdHMAAAAUAAAAAQYAABAAAAAg
-	AAAAMAAAAEAAAABMAAAACAAAAAQDAABqQgAAAAAAAAgAAAAEAwAA+m4AAAAAAAAIAAAA
-	BAMAACvfAwAAAAAACAAAAAQDAABtDgYAAAAAAAgAAAAEAwAANZYjAAAAAAAUAAAAAQYA
-	AHgAAACIAAAAmAAAAKgAAAC4AAAACAAAAAAEAABBxqcaThiAHBgAAAABAgAAAgAAAAAA
-	AAAfAgAAAAAAAB8CAAAAAAAAAAAAAAEFAAAIAAAABAMAAAMAAAAAAAAABAAAAAMDAAD1
-	AQAACAAAAAEJAABmaWxlOi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAAAIcR
-	OQAAAAgAAAAABAAAQcachScAAAAkAAAAAQEAAEVGNzI0RUUwLTE0OTItNDI2RS05RDQ4
-	LTU1MDY4OUZEQTFEQRgAAAABAgAAgQAAAAEAAADvEwAAAQAAAO8TAAABAAAAAQAAAAEB
-	AAAvAAAAMAAAAAECAABkbmliAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABy
-	ZGxmAgAAAAAAAADwAAAA/v///wEAAAAAAAAAEwAAAAQQAABcAAAAAAAAAAUQAADIAAAA
-	AAAAABAQAAD0AAAAAAAAAEAQAADkAAAAAAAAAAIgAADIAQAAAAAAAAUgAAA4AQAAAAAA
-	ABAgAABIAQAAAAAAABEgAAB8AQAAAAAAABIgAABcAQAAAAAAABMgAABsAQAAAAAAACAg
-	AACoAQAAAAAAADAgAAAUAQAAAAAAAAHAAAAcAQAAAAAAABHAAAAgAAAAAAAAABLAAAAs
-	AQAAAAAAAAHQAAAUAQAAAAAAABDQAAAEAAAAAAAAABfwAABMAAAAAAAAACLwAADUAQAA
-	AAAAAA==
+	Ym9va/gCAAAAAAUQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAANgBAAAEAAAAAwMAAAAAACAFAAAAAQEAAFVzZXJzAAAADAAAAAEB
+	AABvbGl2aWEucGFsbXUHAAAAAQEAAC5jb25maWcAAwAAAAEBAABuaXgABQAAAAEBAABz
+	dGF0cwAAABQAAAABBgAAEAAAACAAAAA0AAAARAAAAFAAAAAIAAAABAMAAFhSAAAAAAAA
+	CAAAAAQDAADkcwIAAAAAAAgAAAAEAwAA4mkRAAAAAAAIAAAABAMAAF9qEQAAAAAACAAA
+	AAQDAADXahEAAAAAABQAAAABBgAAfAAAAIwAAACcAAAArAAAALwAAAAIAAAAAAQAAEHH
+	63BmRkhvGAAAAAECAAACAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAQUAAAgAAAAE
+	AwAAAwAAAAAAAAAEAAAAAwMAAPYBAAAIAAAAAQkAAGZpbGU6Ly8vDAAAAAEBAABNYWNp
+	bnRvc2ggSEQIAAAABAMAAACQgpbnAAAACAAAAAAEAABBx7aI8oAAACQAAAABAQAARTcw
+	NDIwMkItRTI0NC00MzA4LUFDOUItOTU0Q0NBNzVEQ0NBGAAAAAECAACBAAAAAQAAAO8T
+	AAABAAAAAAAAAAAAAAABAAAAAQEAAC8AAADYAAAA/v///wEAAAAAAAAAEQAAAAQQAABg
+	AAAAAAAAAAUQAADMAAAAAAAAABAQAAD4AAAAAAAAAEAQAADoAAAAAAAAAAIgAADMAQAA
+	AAAAAAUgAAA8AQAAAAAAABAgAABMAQAAAAAAABEgAACAAQAAAAAAABIgAABgAQAAAAAA
+	ABMgAABwAQAAAAAAACAgAACsAQAAAAAAADAgAAAYAQAAAAAAAAHAAAAgAQAAAAAAABHA
+	AAAgAAAAAAAAABLAAAAwAQAAAAAAAAHQAAAYAQAAAAAAABDQAAAEAAAAAAAAAA==
 	</data>
 	<key>NSStatusItem Preferred Position Battery</key>
 	<real>167</real>
+	<key>NSStatusItem Preferred Position Battery_battery</key>
+	<real>172</real>
 	<key>NSStatusItem Preferred Position CPU</key>
-	<real>479</real>
+	<real>404</real>
 	<key>NSStatusItem Preferred Position Clock</key>
 	<real>78</real>
+	<key>NSStatusItem Preferred Position Clock_sensors</key>
+	<real>86</real>
 	<key>NSStatusItem Preferred Position Network</key>
-	<real>517</real>
+	<real>442</real>
 	<key>NSStatusItem Preferred Position RAM</key>
-	<real>441</real>
+	<real>366</real>
 	<key>NSStatusItem Restore Position Battery_battery</key>
 	<integer>163</integer>
 	<key>NSStatusItem Restore Position Clock_sensors</key>
@@ -153,6 +155,8 @@
 	</dict>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>320 320 800 448 0 0 1440 875 </string>
+	<key>NSWindow Frame eu.exelban.Stats.Settings.WindowFrame</key>
+	<string>504 364 728 480 0 0 1728 1084 </string>
 	<key>Network_VPNMode</key>
 	<true/>
 	<key>Network_base</key>
@@ -162,9 +166,9 @@
 	<key>Network_downloadColor</key>
 	<string>indigo</string>
 	<key>Network_label_position</key>
-	<integer>4</integer>
-	<key>Network_networkChart_position</key>
 	<integer>2</integer>
+	<key>Network_networkChart_position</key>
+	<integer>4</integer>
 	<key>Network_network_chart_box</key>
 	<false/>
 	<key>Network_network_chart_downloadColor</key>
@@ -190,21 +194,27 @@
 	<key>Network_speed_displayValue</key>
 	<string>oi</string>
 	<key>Network_speed_downloadColor</key>
-	<string>white</string>
+	<string>secondBlue</string>
 	<key>Network_speed_icon</key>
-	<string>none</string>
+	<string>dots</string>
+	<key>Network_speed_iconAlignment</key>
+	<string>right</string>
+	<key>Network_speed_iconColor</key>
+	<string>transparent</string>
 	<key>Network_speed_mode</key>
 	<string>twoRows</string>
 	<key>Network_speed_monochrome</key>
-	<true/>
+	<false/>
 	<key>Network_speed_position</key>
-	<integer>3</integer>
+	<integer>0</integer>
 	<key>Network_speed_units</key>
-	<true/>
+	<false/>
 	<key>Network_speed_uploadColor</key>
-	<string>white</string>
+	<string>secondPurple</string>
+	<key>Network_speed_value</key>
+	<false/>
 	<key>Network_speed_valueColor</key>
-	<string>constant</string>
+	<string>none</string>
 	<key>Network_state</key>
 	<true/>
 	<key>Network_state_activeColor</key>
@@ -212,17 +222,21 @@
 	<key>Network_state_nonactiveColor</key>
 	<string>gray</string>
 	<key>Network_state_position</key>
-	<integer>0</integer>
+	<integer>3</integer>
 	<key>Network_textWidgetValue</key>
-	<string>$status</string>
+	<string>⏺</string>
 	<key>Network_text_position</key>
+	<integer>1</integer>
+	<key>Network_updateICMPInterval</key>
 	<integer>1</integer>
 	<key>Network_uploadColor</key>
 	<string>pink</string>
 	<key>Network_usageReset</key>
 	<string>Once per month</string>
+	<key>Network_usageReset_next</key>
+	<integer>1782853200</integer>
 	<key>Network_widget</key>
-	<string>state</string>
+	<string>speed,text</string>
 	<key>Network_widgetActivationThreshold</key>
 	<integer>8</integer>
 	<key>Network_widgetActivationThresholdSize</key>
@@ -265,19 +279,21 @@
 	<false/>
 	<key>dockIcon</key>
 	<false/>
+	<key>remote_tokens_migrated_to_keychain</key>
+	<true/>
 	<key>runAtLoginInitialized</key>
 	<true/>
 	<key>setupProcess</key>
 	<true/>
 	<key>support_ts</key>
-	<integer>1752315845</integer>
+	<integer>1780923690</integer>
 	<key>telemetry</key>
 	<false/>
 	<key>temperature_units</key>
 	<string>system</string>
 	<key>updater_check_ts</key>
-	<integer>1753184748</integer>
+	<integer>1780923690</integer>
 	<key>version</key>
-	<string>2.11.45</string>
+	<string>3.0.1</string>
 </dict>
 </plist>

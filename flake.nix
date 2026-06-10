@@ -3,8 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
-    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-26.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     # Darwin + nixos shared inputs:
     home-manager.url = "github:nix-community/home-manager/release-25.11";
@@ -124,6 +124,8 @@
             # basic tooling
             vscode
             gh
+            gram
+            jujutsu
             # work tooling
             awscli
             bkt
@@ -135,13 +137,16 @@
           ];
           homebrew = {
             enable = true;
+            brews = [
+              "nvm"
+            ];
             casks = [
               "stats"
               "ghostty"
               "karabiner-elements"
             ];
           };
-    
+
           # Necessary for using flakes on this system.
           nix.settings.experimental-features = "nix-command flakes";
 
