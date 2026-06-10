@@ -434,12 +434,12 @@
             ]
           },
           {
-            "description": "Map Control alone to Command + Space",
+            "description": "Map LeftOption alone to Command + Space",
             "manipulators": [
               {
                 "from": {
                   "key_code": "left_option",
-                  "modifiers": { "optional": ["any"] }
+                  "modifiers": {}
                 },
                 "to": [
                   {
