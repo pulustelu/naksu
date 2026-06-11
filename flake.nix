@@ -123,7 +123,6 @@
           ({ pkgs, ... }: {
             environment.systemPackages = with pkgs; [
               # basic tooling
-              vscode
               gh
               jujutsu
               gram
@@ -143,6 +142,7 @@
                 "nvm"
               ];
               casks = [
+                "corretto@21"
                 "stats"
                 "ghostty"
                 "karabiner-elements"
