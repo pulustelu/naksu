@@ -106,7 +106,7 @@
       resources
       discord
       # For proton VPN
-      protonvpn-gui
+      proton-vpn
       wireguard-tools
 
       proton-pass
@@ -133,8 +133,8 @@
   hardware.nvidia = {
     # Open drivers only support the 20xx and 16xx series cards and onwards
     open = false;
-    # May help with graphical corruption and system crashes on suspend, but hasn't worked for me
-    # powerManagement.enable = true;
+    # GTX 1060 3GB is only supported by legacy branches
+    branch = "legacy_580";
   };
 
   # Allow unfree packages
@@ -205,9 +205,6 @@
       dates = [ "weekly" ];
     };
   };
-
-  # hm file overwrite backups
-  home-manager.backupFileExtension = "home-manager-backup";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

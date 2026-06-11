@@ -2,12 +2,12 @@
   description = "My system configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-26.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     # Darwin + nixos shared inputs:
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     # (VSCode extensions are not in nixpkgs)
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -184,6 +184,8 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            # hm file overwrite backups
+            home-manager.backupFileExtension = "home-manager-backup";
             home-manager.users.olivia = ./home-manager/magpie.nix;
 
             # Optionally, use home-manager.extraSpecialArgs to pass
