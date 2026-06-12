@@ -126,6 +126,7 @@
               gh
               jujutsu
               gram
+              ripgrep
               # work tooling
               awscli
               bkt
