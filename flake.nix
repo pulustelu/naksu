@@ -126,7 +126,6 @@
               gh
               jujutsu
               gram
-              nil # nix language server for gram
               # work tooling
               awscli
               bkt
@@ -135,6 +134,8 @@
               _1password-cli
               # languages
               rustup # preferred to let it install its own versions
+              metals # scala LSP
+              nil # nix LSP
             ];
             homebrew = {
               enable = true;
