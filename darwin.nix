@@ -16,6 +16,7 @@
     gh
     forgejo-cli
     ffmpeg
+    nodejs
     (python313.withPackages (
       ps: with ps; [
         ipykernel
