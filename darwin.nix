@@ -10,8 +10,8 @@
     cbqn-replxx
     typst
     gram
-    # external language servers for gram
-    nil
+    nil # nix language server
+    jujutsu
     ripgrep
     gh
     forgejo-cli

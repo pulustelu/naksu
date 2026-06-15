@@ -42,24 +42,15 @@
     enable = true;
     settings = {
       user = {
-        name = "RocketRace";
+        name = "Olivia Palmu";
         email = "git@olivialta.cc";
       };
+      revsets = {
+        bookmark-advance-to = "@-";
+      };
       ui = {
-        pager = ":builtin";
         default-command = "log";
       };
-      # Automatically track remote branches/bookmarks
-      git.auto-local-bookmark = true;
-      # goated alias
-      aliases.tug = [
-        "bookmark"
-        "move"
-        "--from"
-        "heads(::@- & bookmarks())"
-        "--to"
-        "@-"
-      ];
     };
   };
 }

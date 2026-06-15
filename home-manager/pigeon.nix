@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./vscode.nix
     ./git.nix
     ./terminal.nix
   ];
@@ -81,30 +80,6 @@
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
     ];
-  };
-  # custom fonts and keylayouts need to go through lower level mechanisms provided by macos
-  # jank as hell tbh
-  home.file."Library/Fonts/Symlinks" = {
-    enable = true;
-    source = ../fonts;
-    recursive = true;
-    onChange = ''
-      cd ~/Library/Fonts
-      rm -rf Custom
-      mkdir Custom
-      cp -Lr Symlinks/* Custom
-    '';
-  };
-  home.file."Library/Application Support/discord/settings.json" = {
-    enable = true;
-    text = ''
-      {
-        "chromiumSwitches": {},
-        "IS_MAXIMIZED": true,
-        "IS_MINIMIZED": false,
-        "DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING": true
-      }
-    '';
   };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
