@@ -37,8 +37,6 @@
       ".direnv"
     ];
   };
-  # gh is sometimes useful, too, though I've mainly used it for cloning
-  programs.gh.enable = true;
   # yay yay! jj!
   programs.jujutsu = {
     enable = true;

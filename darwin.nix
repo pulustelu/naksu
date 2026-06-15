@@ -12,6 +12,10 @@
     gram
     # external language servers for gram
     nil
+    ripgrep
+    gh
+    forgejo-cli
+    ffmpeg
     (python313.withPackages (
       ps: with ps; [
         ipykernel
@@ -146,8 +150,6 @@
       autoUpdate = true;
       # upgrade packages
       upgrade = true;
-      # remove unlisted packages
-      cleanup = "zap";
     };
     brews = [ ];
     casks = [

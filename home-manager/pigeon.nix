@@ -54,6 +54,13 @@
     recursive = false;
   };
 
+  home.file.".zprofile" = {
+    enable = true;
+    text = ''
+      eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+    '';
+  };
+
   programs.zsh = {
     enable = true;
     shellAliases = {
