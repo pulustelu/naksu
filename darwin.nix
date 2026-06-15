@@ -31,9 +31,15 @@
       "nix-command"
       "flakes"
     ];
-    optimise.automatic = true;
-    gc.automatic = true;
-    gc.options = "--delete-older-than 7d";
+    optimise = {
+      automatic = true;
+      # interval defaults to sunday 03:15
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+      # interval defaults to sunday 03:15
+    };
   };
 
   # Set Git commit hash for darwin-version.
@@ -46,12 +52,10 @@
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  # # Enable nonfree apps
-  # nixpkgs.config.allowUnfree = true;
-
   # yey
   networking.hostName = "pigeon";
 
+  # Required in later versions of nix-darwin
   system.primaryUser = "Olivia";
   # settings
   system.defaults = {
