@@ -18,9 +18,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    discord
-    qbittorrent
-    zotero
     # Package BeautifulDiscord and point it to my home config
     (
       let
@@ -55,9 +52,6 @@
   home.file.".config/karabiner" = {
     source = ../karabiner;
     recursive = false;
-    onChange = ''
-      /bin/launchctl kickstart -k gui/`id -u`/org.pqrs.karabiner.karabiner_console_user_server
-    '';
   };
 
   programs.zsh = {
@@ -108,11 +102,11 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Allow home-manager apps to be discovered by spotlight and other mac tools.
-  # This was previously handled by linkApps.
-  # If there's a permission error, try this:
-  # > I managed to work around this issue by running rm -r ~/Applications/Home\ Manager\ Apps/ before home-manager switch.
-  # (https://github.com/nix-community/home-manager/issues/8174)
-  targets.darwin.copyApps.enable = true;
-  targets.darwin.linkApps.enable = false;
+  # # Allow home-manager apps to be discovered by spotlight and other mac tools.
+  # # This was previously handled by linkApps.
+  # # If there's a permission error, try this:
+  # # > I managed to work around this issue by running rm -r ~/Applications/Home\ Manager\ Apps/ before home-manager switch.
+  # # (https://github.com/nix-community/home-manager/issues/8174)
+  # targets.darwin.copyApps.enable = true;
+  # targets.darwin.linkApps.enable = false;
 }

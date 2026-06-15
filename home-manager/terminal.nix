@@ -9,13 +9,12 @@
       theme = Ayu
       window-width = 100
       window-height = 30
-      macos-icon = microchip
     '';
   };
   # rg
   programs.ripgrep.enable = true;
   # youtube stuff
-  programs.yt-dlp.enable = true;
+  # programs.yt-dlp.enable = true;
   # media
   home.packages = with pkgs; [ ffmpeg ];
 }

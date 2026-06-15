@@ -6,11 +6,12 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    # development
-    rustup # latest
-    radicle-node
+    rustup
     cbqn-replxx
     typst
+    gram
+    # external language servers for gram
+    nil
     (python313.withPackages (
       ps: with ps; [
         ipykernel
@@ -18,7 +19,6 @@
         matplotlib
       ]
     ))
-    # personal
   ];
 
   # Nix-related configuration
@@ -42,13 +42,8 @@
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  # Enable nonfree apps, e.g. vscode
-  nixpkgs.config.allowUnfree = true;
-
-  # an overlay is some way to forward to a different registry than nixpkgs, I think?
-  nixpkgs.overlays = with inputs; [
-    nix-vscode-extensions.overlays.default
-  ];
+  # # Enable nonfree apps
+  # nixpkgs.config.allowUnfree = true;
 
   # yey
   networking.hostName = "pigeon";
@@ -92,11 +87,6 @@
       NSDefaultDisplayName = "DuckDuckGo";
       NSProviderIdentifier = "com.duckduckgo";
     };
-    # Custom shortcuts
-    CustomUserPreferences.NSGlobalDomain.NSUserKeyEquivalents = {
-      "Open With Code" = "@^$\\U00f6";
-      "Open With TextEdit" = "@^$\\U00e4";
-    };
     # Pretty swell double click threshold
     CustomUserPreferences.NSGlobalDomain."com.apple.mouse.doubleClickThreshold" = "0.5";
     # No natural scroll
@@ -116,124 +106,17 @@
     # Disable control center from the right edge
     CustomUserPreferences."com.apple.AppleMultitouchTrackpad".TrackpadTwoFingerFromRightEdgeSwipeGesture =
       0;
-    # Do nothing on fn key
-    hitoolbox.AppleFnUsageType = "Do Nothing";
     # DON'T AUTOMATICALLY FUCK UP MY KEYBOARD LAYOUT
     CustomUserPreferences."com.apple.HIToolbox".AppleGlobalTextInputProperties.TextInputGlobalPropertyPerContextInput =
       0;
     # I would prefer not to click to show desktop
     WindowManager.EnableStandardClickToShowDesktop = false;
-    # Minor control center customizations: hide some things and show others
-    # (battery will be shown by Stats app)
-    CustomUserPreferences."com.apple.controlcenter"."NSStatusItem Visible Battery" = 0; # not documented?
-    controlcenter.Bluetooth = true;
-    controlcenter.NowPlaying = false;
-    controlcenter.Sound = false;
-    # Customize touchbar shortcuts
-    CustomUserPreferences."com.apple.controlstrip".MiniCustomized = [
-      "com.apple.system.mission-control"
-      "com.apple.system.brightness"
-      "com.apple.system.volume"
-      "com.apple.system.screencapture"
-    ];
-    # Remove some spotlight options
-    CustomUserPreferences."com.apple.spotlight".orderedItems = [
-      {
-        enabled = 1;
-        name = "APPLICATIONS";
-      }
-      {
-        enabled = 1;
-        name = "MENU_EXPRESSION";
-      }
-      {
-        enabled = 0;
-        name = "CONTACT";
-      }
-      {
-        enabled = 1;
-        name = "MENU_CONVERSION";
-      }
-      {
-        enabled = 1;
-        name = "MENU_DEFINITION";
-      }
-      {
-        enabled = 1;
-        name = "DOCUMENTS";
-      }
-      {
-        enabled = 0;
-        name = "EVENT_TODO";
-      }
-      {
-        enabled = 1;
-        name = "DIRECTORIES";
-      }
-      {
-        enabled = 0;
-        name = "FONTS";
-      }
-      {
-        enabled = 1;
-        name = "IMAGES";
-      }
-      {
-        enabled = 0;
-        name = "MESSAGES";
-      }
-      {
-        enabled = 0;
-        name = "MOVIES";
-      }
-      {
-        enabled = 0;
-        name = "MUSIC";
-      }
-      {
-        enabled = 1;
-        name = "MENU_OTHER";
-      }
-      {
-        enabled = 1;
-        name = "PDF";
-      }
-      {
-        enabled = 1;
-        name = "PRESENTATIONS";
-      }
-      {
-        enabled = 0;
-        name = "MENU_SPOT LIGHT_SUGGESTIONS";
-      }
-      {
-        enabled = 1;
-        name = "SPREADSHEETS";
-      }
-      {
-        enabled = 1;
-        name = "SYSTEM_PREFS";
-      }
-      {
-        enabled = 0;
-        name = "TIPS";
-      }
-      {
-        enabled = 0;
-        name = "BOOKMARKS";
-      }
-    ];
     # Hide dock
     dock.autohide = true;
-    # Minimize to apps, turning minimize into a flamboyant hide
-    dock.minimize-to-application = true;
     # DO NOT REARRANGE MY SPACES!!
     dock.mru-spaces = false;
     # No recent apps in dock
     dock.show-recents = false;
-    # Don't set persistent apps here because that's hard and they're pointing to the nix store anyways
-    # dock.persistent-apps = [
-    # ];
     # Hot corners: Bottom right = Show desktop
     dock.wvous-br-corner = 4;
     # Prefer column view in finder
@@ -247,14 +130,6 @@
     finder.ShowStatusBar = false;
     # Sort folders first in finder
     finder._FXSortFoldersFirst = true;
-    # These are disabled because you can't write to them directly
-    # # Three finger double tap zoom
-    # CustomUserPreferences."com.apple.universalaccess".closeViewSplitScreenRatio = "0.2";
-    # CustomUserPreferences."com.apple.universalaccess".closeViewTrackpadGestureZoomEnabled = 1;
-    # CustomUserPreferences."com.apple.universalaccess".closeViewZoomFactorBeforeTermination = 1;
-    # CustomUserPreferences."com.apple.universalaccess".closeViewZoomedIn = 0;
-    # # Show icons in finder title bar
-    # CustomUserPreferences."com.apple.universalaccess".showWindowTitlebarIcons = 1;
   };
   # Allow touchid in sudo prompts
   security.pam.services.sudo_local.touchIdAuth = true;
@@ -262,9 +137,7 @@
   fonts.packages = [
     pkgs.meslo-lgs-nf
   ];
-  # no
-  environment.variables.HOMEBREW_NO_ANALYTICS = "1";
-  # homebrew junk here
+  # homebrew here
   homebrew = {
     enable = true;
     # I don't care about idempotent behavior I just wanna have my apps up to date
@@ -276,11 +149,7 @@
       # remove unlisted packages
       cleanup = "zap";
     };
-    brews = [
-      # last resorts for computer graphics course
-      "cmake"
-      "pkg-config"
-    ];
+    brews = [ ];
     casks = [
       "arduino-ide"
       "audacity"
@@ -288,18 +157,13 @@
       "discord"
       "dyalog"
       "firefox"
-      # "fontforge-app"
       "ghostty"
       "gimp"
       "godot"
-      "iterm2"
       "karabiner-elements"
-      # "kicad"
       "obs"
       "prismlauncher"
-      # "processing"
       "proton-drive"
-      "proton-mail"
       "protonvpn"
       "signal"
       "spotify"
@@ -307,8 +171,8 @@
       "steam"
       "tailscale-app"
       "telegram"
-      # "twine-app"
       "ukelele"
+      "zotero"
     ];
   };
 }

@@ -1,7 +1,7 @@
 { ... }:
 {
   programs.vscode = {
-    enable = true;
+    enable = false;
     # package = pkgs.vscodium; # I need some proprietary extensions unfortunately
     # This property will be used to generate settings.json
     # Note that many of the annoyance blockers are no longer needed after switching to vscodium
