@@ -4,7 +4,6 @@
 
 {
   pkgs,
-  inputs,
   ...
 }:
 
@@ -98,6 +97,8 @@
       signal-desktop
       spotify
       prismlauncher
+      gram
+      nil
 
       # global .net SDK for tModLoader mod development
       dotnetCorePackages.sdk_8_0_4xx
