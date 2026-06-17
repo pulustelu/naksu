@@ -41,9 +41,11 @@
             environment.systemPackages = with pkgs; [
               # basic tooling
               gh
+              forgejo-cli
               jujutsu
               gram
               ripgrep
+              python314
               # work tooling
               awscli
               bkt
