@@ -1,21 +1,24 @@
 { pkgs, inputs, ... }:
 {
-  # originally from home.nix, needs to be defined outside home-manager due to bees apparently
+  # Required for nix-darwin
+  system.primaryUser = "Olivia";
+  # This should match the users entry in home-manager/pigeon.nix
   users.users.olivia.home = "/Users/olivia";
+  networking.hostName = "pigeon";
+  nixpkgs.hostPlatform = "aarch64-darwin";
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     rustup
     cbqn-replxx
     typst
     gram
-    nil # nix language server
+    nil
     jujutsu
     ripgrep
     gh
     forgejo-cli
     ffmpeg
+    direnv
     nodejs
     (python313.withPackages (
       ps: with ps; [
@@ -26,38 +29,50 @@
     ))
   ];
 
-  # Nix-related configuration
-  nix = {
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      # upgrade packages
+      upgrade = true;
+      # Homebrew packages are managed exclusively by nix-darwin,
+      # so we explode all the untracked ones.
+      cleanup = "zap";
+    };
+    casks = [
+      "arduino-ide"
+      "audacity"
+      "blender"
+      "discord"
+      "dyalog"
+      "firefox"
+      "ghostty"
+      "gimp"
+      "godot"
+      "karabiner-elements"
+      "obs"
+      "prismlauncher"
+      "proton-drive"
+      "protonvpn"
+      "signal"
+      "spotify"
+      "stats"
+      "steam"
+      "tailscale-app"
+      "telegram"
+      "ukelele"
+      "zotero"
     ];
-    optimise = {
-      automatic = true;
-      # interval defaults to sunday 03:15
-    };
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 7d";
-      # interval defaults to sunday 03:15
-    };
   };
 
-  # Set Git commit hash for darwin-version.
-  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  # Add p10k font
+  fonts.packages = [
+    pkgs.meslo-lgs-nf
+  ];
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 5;
+  # Allow touchid in sudo prompts
+  security.pam.services.sudo_local.touchIdAuth = true;
 
-  # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = "aarch64-darwin";
-
-  # yey
-  networking.hostName = "pigeon";
-
-  # Required in later versions of nix-darwin
-  system.primaryUser = "Olivia";
   # settings
   system.defaults = {
     # Don't navigate back and forward with two-finger scroll
@@ -140,46 +155,24 @@
     # Sort folders first in finder
     finder._FXSortFoldersFirst = true;
   };
-  # Allow touchid in sudo prompts
-  security.pam.services.sudo_local.touchIdAuth = true;
-  # Add p10k font
-  fonts.packages = [
-    pkgs.meslo-lgs-nf
-  ];
-  # homebrew here
-  homebrew = {
-    enable = true;
-    # I don't care about idempotent behavior I just wanna have my apps up to date
-    onActivation = {
-      # update brew formulae
-      autoUpdate = true;
-      # upgrade packages
-      upgrade = true;
-    };
-    brews = [ ];
-    casks = [
-      "arduino-ide"
-      "audacity"
-      "blender"
-      "discord"
-      "dyalog"
-      "firefox"
-      "ghostty"
-      "gimp"
-      "godot"
-      "karabiner-elements"
-      "obs"
-      "prismlauncher"
-      "proton-drive"
-      "protonvpn"
-      "signal"
-      "spotify"
-      "stats"
-      "steam"
-      "tailscale-app"
-      "telegram"
-      "ukelele"
-      "zotero"
+
+  # Nix-related configuration
+  nix = {
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
     ];
+    optimise = {
+      automatic = true;
+      # interval defaults to every sunday 03:15
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+      # interval defaults to every sunday 03:15
+    };
   };
+
+  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  system.stateVersion = 5;
 }

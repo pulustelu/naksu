@@ -15,8 +15,6 @@
       home-manager,
     }:
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#pigeon
       darwinConfigurations."pigeon" = nix-darwin.lib.darwinSystem {
         modules = [
           ./darwin.nix
@@ -25,11 +23,11 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.olivia = import ./home-manager/pigeon.nix;
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }
         ];
         specialArgs = { inherit inputs; };
       };
+
       darwinConfigurations."drone" = nix-darwin.lib.darwinSystem {
         modules = [
           home-manager.darwinModules.home-manager
@@ -39,9 +37,9 @@
             home-manager.users."olivia.palmu" = import ./home-manager/drone.nix;
           }
           ({ pkgs, ... }: {
-            users.users."olivia.palmu" = {
-              home = "/Users/olivia.palmu";
-            };
+            system.primaryUser = "olivia.palmu";
+            users.users."olivia.palmu".home = "/Users/olivia.palmu";
+            nixpkgs.hostPlatform = "aarch64-darwin";
 
             environment.systemPackages = with pkgs; [
               # basic tooling
@@ -63,6 +61,7 @@
               metals # scala LSP
               nil # nix LSP
             ];
+
             homebrew = {
               enable = true;
               brews = [
@@ -76,33 +75,34 @@
               ];
             };
 
-            # Necessary for using flakes on this system.
-            nix.settings.experimental-features = "nix-command flakes";
-
-            # Set Git commit hash for darwin-version.
-            system.configurationRevision = self.rev or self.dirtyRev or null;
-
-            # Used for backwards compatibility, please read the changelog before changing.
-            # $ darwin-rebuild changelog
-            system.stateVersion = 6;
-
             # use touch id for sudo prompts
             security.pam.services.sudo_local.touchIdAuth = true;
 
-            # nix-darwin no longer runs implicitly as the current user
-            system.primaryUser = "olivia.palmu";
-
-            # necessary for vscode
             nixpkgs.config.allowUnfree = true;
 
-            # The platform the configuration will be used on.
-            nixpkgs.hostPlatform = "aarch64-darwin";
+            nix = {
+              settings.experimental-features = [
+                "nix-command"
+                "flakes"
+              ];
+              optimise = {
+                automatic = true;
+                # interval defaults to every sunday 03:15
+              };
+              gc = {
+                automatic = true;
+                options = "--delete-older-than 7d";
+                # interval defaults to every sunday 03:15
+              };
+            };
+
+            system.configurationRevision = self.rev or self.dirtyRev or null;
+            system.stateVersion = 6;
           })
         ];
         specialArgs = { inherit inputs; };
       };
-      # Build nixos flake using:
-      # $ nixos-rebuild build --flake .#magpie
+
       nixosConfigurations."magpie" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
@@ -111,12 +111,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            # hm file overwrite backups
+            # TODO: hm file overwrite backups -- needed?
             home-manager.backupFileExtension = "home-manager-backup";
             home-manager.users.olivia = ./home-manager/magpie.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
           }
         ];
       };
