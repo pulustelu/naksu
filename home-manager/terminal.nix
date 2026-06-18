@@ -7,8 +7,6 @@
     enable = true;
     text = ''
       theme = Ayu
-      window-width = 100
-      window-height = 30
     '';
   };
 }

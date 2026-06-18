@@ -3,19 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-26.05";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
-    # Darwin + nixos shared inputs:
     home-manager.url = "github:nix-community/home-manager/release-26.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-darwin,
       nix-darwin,
       home-manager,
     }:
@@ -37,7 +32,17 @@
       };
       darwinConfigurations."drone" = nix-darwin.lib.darwinSystem {
         modules = [
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users."olivia.palmu" = import ./home-manager/drone.nix;
+          }
           ({ pkgs, ... }: {
+            users.users."olivia.palmu" = {
+              home = "/Users/olivia.palmu";
+            };
+
             environment.systemPackages = with pkgs; [
               # basic tooling
               gh
@@ -46,6 +51,7 @@
               gram
               ripgrep
               python314
+              direnv
               # work tooling
               awscli
               bkt
