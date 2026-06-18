@@ -103,6 +103,15 @@
   # Configure console keymap
   console.keyMap = "fi";
 
+  # Enable the ibus IME
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
+      anthy # Japanese
+    ];
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
