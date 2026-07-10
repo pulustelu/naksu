@@ -11,6 +11,17 @@
     source = ../karabiner;
   };
 
+  home.file.".zprofile" = {
+    enable = true;
+    text = ''
+      # <-- Start of core-developer-tooling -->
+      typeset -U path
+      path+=("/Users/olivia.palmu/Code/core-developer-tools/bin")
+      # <-- End of core-developer-tooling -->
+      eval "$(direnv hook zsh)"
+    '';
+  };
+
   programs.jujutsu = {
     enable = true;
     settings = {
