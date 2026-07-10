@@ -36,69 +36,73 @@
             home-manager.useUserPackages = true;
             home-manager.users."olivia.palmu" = import ./home-manager/drone.nix;
           }
-          ({ pkgs, ... }: {
-            system.primaryUser = "olivia.palmu";
-            users.users."olivia.palmu".home = "/Users/olivia.palmu";
-            nixpkgs.hostPlatform = "aarch64-darwin";
+          (
+            { pkgs, ... }:
+            {
+              system.primaryUser = "olivia.palmu";
+              users.users."olivia.palmu".home = "/Users/olivia.palmu";
+              nixpkgs.hostPlatform = "aarch64-darwin";
 
-            environment.systemPackages = with pkgs; [
-              # basic tooling
-              gh
-              forgejo-cli
-              jujutsu
-              gram
-              ripgrep
-              python314
-              direnv
-              # work tooling
-              awscli
-              bkt
-              jq
-              ssm-session-manager-plugin
-              _1password-cli
-              # languages
-              rustup # preferred to let it install its own versions
-              metals # scala LSP
-              nil # nix LSP
-            ];
-
-            homebrew = {
-              enable = true;
-              brews = [
-                "nvm"
+              environment.systemPackages = with pkgs; [
+                # basic tooling
+                gh
+                forgejo-cli
+                jujutsu
+                gram
+                ripgrep
+                python314
+                direnv
+                cachix
+                # work tooling
+                awscli
+                bkt
+                jq
+                ssm-session-manager-plugin
+                _1password-cli
+                # languages
+                rustup # preferred to let it install its own versions
+                metals # scala LSP
+                nil # nix LSP
               ];
-              casks = [
-                "corretto@21"
-                "stats"
-                "ghostty"
-                "karabiner-elements"
-              ];
-            };
 
-            # use touch id for sudo prompts
-            security.pam.services.sudo_local.touchIdAuth = true;
-
-            nixpkgs.config.allowUnfree = true;
-
-            nix = {
-              settings.experimental-features = [
-                "nix-command"
-                "flakes"
-              ];
-              optimise = {
-                automatic = true;
-                # interval defaults to every sunday 03:15
+              homebrew = {
+                enable = true;
+                brews = [
+                  "nvm"
+                ];
+                casks = [
+                  "corretto@21"
+                  "stats"
+                  "ghostty"
+                  "karabiner-elements"
+                ];
               };
-              gc = {
-                automatic = true;
-                options = "--delete-older-than 7d";
-                # interval defaults to every sunday 03:15
-              };
-            };
 
-            system.configurationRevision = self.rev or self.dirtyRev or null;
-            system.stateVersion = 6;
-          })
+              # use touch id for sudo prompts
+              security.pam.services.sudo_local.touchIdAuth = true;
+
+              nixpkgs.config.allowUnfree = true;
+
+              nix = {
+                settings.experimental-features = [
+                  "nix-command"
+                  "flakes"
+                ];
+                optimise = {
+                  automatic = true;
+                  # interval defaults to every sunday 03:15
+                };
+                gc = {
+                  automatic = true;
+                  options = "--delete-older-than 7d";
+                  # interval defaults to every sunday 03:15
+                };
+              };
+
+              system.configurationRevision = self.rev or self.dirtyRev or null;
+              system.stateVersion = 6;
+            }
+          )
         ];
         specialArgs = { inherit inputs; };
       };
