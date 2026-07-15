@@ -69,6 +69,9 @@
                 enable = true;
                 brews = [
                   "nvm"
+                  "docker"
+                  "docker-compose"
+                  "colima"
                 ];
                 casks = [
                   "corretto@21"
