@@ -16,6 +16,7 @@ in
     typst
     nixpkgs-unstable.gram
     nil
+    lemminx
     jujutsu
     ripgrep
     gh
