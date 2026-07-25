@@ -1,4 +1,7 @@
 { pkgs, inputs, ... }:
+let
+  nixpkgs-unstable = import inputs.nixpkgs-unstable { system = "aarch64-darwin"; };
+in
 {
   # Required for nix-darwin
   system.primaryUser = "Olivia";
@@ -11,7 +14,7 @@
     rustup
     cbqn-replxx
     typst
-    gram
+    nixpkgs-unstable.gram
     nil
     jujutsu
     ripgrep
