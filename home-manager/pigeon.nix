@@ -13,13 +13,6 @@
     recursive = false;
   };
 
-  home.file.".zprofile" = {
-    enable = true;
-    text = ''
-      eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-    '';
-  };
-
   # this may be causing some issues with conflicting files -- macos maybe creates some /etc entries for zsh?
   programs.zsh = {
     enable = true;
@@ -31,8 +24,12 @@
       pigeon-bump = "pigeon-fetch && pigeon-update && pigeon-switch && pigeon-push";
     };
     # Initialize p10k configuration (took a while to find the config line because the wizard doesn't tell you)
+    # also homebrew
+    # also direnv
     initContent = ''
       [[ ! -f ${../p10k/.p10k.zsh} ]] || source ${../p10k/.p10k.zsh}
+      eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+      eval "$(direnv hook zsh)"
     '';
     plugins = [
       {
